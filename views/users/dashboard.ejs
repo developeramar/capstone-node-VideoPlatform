@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <a href="/logout">Logout</a>
+    
+<div class="head1">
+    <h1 class="hello-login">Hello <%= user.charAt(0).toUpperCase() + user.slice(1)  %></h1>
+    <div class="logo-div">
+        
+        <img src="/logos/logo1.png" alt="video-viewer-logo">
+        <div class="head-div">
+        MOST WATCHED VIDEOS OF THE WEEK
+        </div>
+       
+    </div>
+    
+</div>
+
+<div class="video-div">
+    <ul>
+        <% if (files.length > 0) { %>
+  <li>  <%= files[counter].title %> </li>
+  <li> <%= files[counter].description %> </li>
+  <br>
+  <li> 
+
+      <input type="text" id="copy-link" value = "https://localhost:3000/<%= files[0].filepath %>"> 
+
+    <button id="c-l-btn" >
+        Share video link
+    </button> 
+    
+    <div id="myTooltip"> Copy to clipboard </div>
+</li>
+  <br>
+   <li id="vid-display"> <video controls id="videoPlayer" name="vid" width="750"  >
+            <source type="video/mp4" src=<%= files[counter].filepath %> /> 
+    </video>
+</li>  <% } %>
+
+</ul>
+<div class="buttons">
+   <button id="prev">Previous</button>
+    <button id="next">Next</button>   
+</div>
+
+    <p id="counter"><%= counter %></p>
+    <p id="count"><%= files.length %></p>
+</div>
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   
+  
+</body>
+
+<script src="/script/user_script.js" defer>
+        
+</script>
+
+
+</html>
