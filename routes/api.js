@@ -25,19 +25,17 @@ apiRoute.post('/post', verifyToken, function (req, res) {
 });
 
 apiRoute.post('/login', function (req, res) {
-    //mock user
+    // Mock user
     const user = {
         id: 5,
         email: 'poa@test.com',
         password: '1234'
-    }
+    };
 
-    jwt.sign({user}, process.env.SECRET_KEY, { expiresIn: '300s' }, (err, token) => {
-        res.json({
-            token
-        })
-    })
-})
+    jwt.sign({ user }, process.env.SECRET_KEY, { expiresIn: '300s' }, (err, token) => {
+        res.render('login', { token });
+    });
+});
 
 function verifyToken(req, res, next) {
     //Get Auth Header

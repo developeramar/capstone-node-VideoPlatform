@@ -38,37 +38,37 @@ app.use('/api', apiRoute);
 
 initializePassport(passport);
 
-//create sessions for users
-//app.set('trust proxy', 1)//unleaks memory
+// ... other imports and configurations ...
 
+// Initialize the session middleware before Passport
 app.use(session({
-   cookie:{
-     secure:true,
-     maxAge:60000
-   },
+  cookie: {
+    secure: true,
+    maxAge: 60000
+  },
   secret: 'secret',
-   store: new pgSession({
-     pool : pool,                
-     tableName : 'user_session'   
-   }),
+  store: new pgSession({
+    pool: pool,
+    tableName: 'user_session'
+  }),
   resave: false,
   saveUninitialized: true
-})); 
+}));
 
- app.use(function(req,res,next){
-   if(!req.session){
-       return next(new Error('Oh no')) //handle crash error
-   }
-   next()
- })
+app.use(function(req, res, next) {
+  if (!req.session) {
+    return next(new Error('Oh no')); // handle crash error
+  }
+  next();
+});
 
-//use the passport middleware for authentication
+// Initialize Passport after the session middleware
 app.use(passport.initialize());
+// Uncomment the line below if you are using passport.session()
+// app.use(passport.session());
 
-//use the session middleware to create session
-//app.use(passport.session());
+// ... other routes and configurations ...
 
-
-app.listen(port, function () {
-  console.log('Listening on port ' + port );
+app.listen(port, function() {
+  console.log('Listening on port ' + port);
 });
